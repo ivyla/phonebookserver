@@ -18,6 +18,9 @@ let persons = [
     {id: 5, name: "Soulja boy", number: "678-999-8212"}
 ]
 
+app.get("/", (request, response) => {
+    response.send("hello world")
+})
 // Returns a hardcoded list of phonebook entries from the address http://localhost:3001/api/persons:
 app.get("/api/persons", (request, response) => {
     response.json(persons)
