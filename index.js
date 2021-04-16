@@ -1,7 +1,7 @@
 const http = require("http")
 const cors = require("cors")
 const express = require("express")
-const nodemon = require("nodemon")
+// const nodemon = require("nodemon")
 const morgan = require("morgan")
 const {request} = require("express")
 const app = express()
