@@ -5,25 +5,45 @@ const nodemon = require("nodemon")
 const morgan = require("morgan")
 const {request} = require("express")
 const app = express()
+// Mongo Stuff
+const mongoose = require("mongoose")
+// const Person = require("./models/Person")
 app.use(express.static("build"))
 app.use(cors())
 app.use(express.json())
 app.use(morgan("tiny"))
-//
-// let persons = [
-//     {id: 1, name: "Arto Hellas", number: "040-123456"},
-//     {id: 2, name: "Ada Lovelace", number: "39-44-545435"},
-//     {id: 3, name: "Dan Abramov", number: "12-43-5454"},
-//     {id: 4, name: "Mary Poppendieck", number: "415-666-5436"},
-//     {id: 5, name: "Soulja boy", number: "678-999-8212"}
-// ]
+let persons = [
+    {id: 1, name: "Arto Hellas", number: "040-123456"},
+    {id: 2, name: "Ada Lovelace", number: "39-44-545435"},
+    {id: 3, name: "Dan Abramov", number: "12-43-5454"},
+    {id: 4, name: "Mary Poppendieck", number: "415-666-5436"},
+    {id: 5, name: "Soulja boy", number: "678-999-8212"}
+]
+const password = "9LktqzsbL9kZUpYF"
+const url = `mongodb+srv://fullstack:${password}@cluster0.1kw9j.mongodb.net/phonebook-entries?retryWrites=true&w=majority`
+mongoose.connect(url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true
+})
+
+const personSchema = new mongoose.Schema({
+    person: String,
+    number: String
+})
+
+const Entry = mongoose.model("Entry", personSchema)
 
 app.get("/", (request, response) => {
     response.send("hello world")
 })
 // Returns a hardcoded list of phonebook entries from the address http://localhost:3001/api/persons:
 app.get("/api/persons", (request, response) => {
-    response.json(persons)
+    // response.json(persons)
+    Entry.find({}).then((entries) => {
+        response.json(entries)
+    })
 })
 
 // Info page for /info
