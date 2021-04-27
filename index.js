@@ -1,7 +1,7 @@
 const http = require("http")
 const cors = require("cors")
 const express = require("express")
-// const nodemon = require("nodemon")
+const nodemon = require("nodemon")
 const morgan = require("morgan")
 const {request} = require("express")
 const app = express()
@@ -10,13 +10,13 @@ app.use(cors())
 app.use(express.json())
 app.use(morgan("tiny"))
 //
-let persons = [
-    {id: 1, name: "Arto Hellas", number: "040-123456"},
-    {id: 2, name: "Ada Lovelace", number: "39-44-545435"},
-    {id: 3, name: "Dan Abramov", number: "12-43-5454"},
-    {id: 4, name: "Mary Poppendieck", number: "415-666-5436"},
-    {id: 5, name: "Soulja boy", number: "678-999-8212"}
-]
+// let persons = [
+//     {id: 1, name: "Arto Hellas", number: "040-123456"},
+//     {id: 2, name: "Ada Lovelace", number: "39-44-545435"},
+//     {id: 3, name: "Dan Abramov", number: "12-43-5454"},
+//     {id: 4, name: "Mary Poppendieck", number: "415-666-5436"},
+//     {id: 5, name: "Soulja boy", number: "678-999-8212"}
+// ]
 
 app.get("/", (request, response) => {
     response.send("hello world")
